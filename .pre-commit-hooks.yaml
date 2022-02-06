@@ -1,0 +1,9 @@
+-   id: black-tabby-formatter
+    name: black-tabby-formatter
+    description: Black formatter with tabs instead of spaces
+    entry: black-tabby-formatter
+    language: python
+    types: [python]
+    # for backward compatibility
+    files: ''
+    minimum_pre_commit_version: 0.15.0
