@@ -43,7 +43,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 old_content = fd.read()
             if old_content != new_content:
                 ret = 1
-                sys.stderr.write(f'reformatted {orig_file}\n')
                 with open(orig_file, 'w', encoding='utf=8') as fd:
                     fd.write(new_content)
 

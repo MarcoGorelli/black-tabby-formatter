@@ -21,7 +21,7 @@ Sample `.pre-commit-config.yaml`:
 
 ```yaml
 -   repo: https://github.com/MarcoGorelli/black-tabby-formatter
-    rev: v0.1.0
+    rev: v0.1.1
     hooks:
     -   id: black-tabby-formatter
 ```
