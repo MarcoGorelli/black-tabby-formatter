@@ -1,4 +1,3 @@
-black
 covdefaults
 pytest
 pytest-cov
