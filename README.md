@@ -1,22 +1,16 @@
-[![Build Status](https://github.com/MarcoGorelli/absolufy-imports/workflows/tox/badge.svg)](https://github.com/MarcoGorelli/absolufy-imports/actions?workflow=tox)
-[![Coverage](https://codecov.io/gh/MarcoGorelli/absolufy-imports/branch/main/graph/badge.svg)](https://codecov.io/gh/MarcoGorelli/absolufy-imports)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/MarcoGorelli/absolufy-imports/main.svg)](https://results.pre-commit.ci/latest/github/MarcoGorelli/absolufy-imports/main)
+[![Build Status](https://github.com/MarcoGorelli/black-tabby-formatter/workflows/tox/badge.svg)](https://github.com/MarcoGorelli/black-tabby-formatter/actions?workflow=tox)
+[![Coverage](https://codecov.io/gh/MarcoGorelli/black-tabby-formatter/branch/main/graph/badge.svg)](https://codecov.io/gh/MarcoGorelli/black-tabby-formatter)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/MarcoGorelli/black-tabby-formatter/main.svg)](https://results.pre-commit.ci/latest/github/MarcoGorelli/black-tabby-formatter/main)
 
-absolufy-imports
-================
+black-tabby-formatter
+=====================
 
-A tool and pre-commit hook to automatically convert relative imports to absolute.
-
-<p align="center">
-    <a href="#readme">
-        <img alt="demo" src="https://raw.githubusercontent.com/nbQA-dev/nbQA-demo/master/abs-imports.gif">
-    </a>
-</p>
+A tool (and pre-commit hook) to run `black`, but with tabs instead of spaces.
 
 ## Installation
 
 ```console
-$ pip install absolufy-imports
+$ pip install black-tabby-formatter
 ```
 
 ## Usage as a pre-commit hook (recommended)
@@ -26,49 +20,14 @@ See [pre-commit](https://github.com/pre-commit/pre-commit) for instructions
 Sample `.pre-commit-config.yaml`:
 
 ```yaml
--   repo: https://github.com/MarcoGorelli/absolufy-imports
-    rev: v0.3.1
+-   repo: https://github.com/MarcoGorelli/black-tabby-formatter
+    rev: v0.1.0
     hooks:
-    -   id: absolufy-imports
+    -   id: black-tabby-formatter
 ```
 
-## Command-line example
-
-```console
-$ absolufy-imports mypackage/myfile.py
-```
-
-```diff
-- from . import __version__
-+ from mypackage import __version__
-```
 
 ## Configuration
 
-### Application directories
-
-If your package follows the popular `./src` layout, you can pass your application directories via `--application-directories`, e.g.
-
-```console
-$ absolufy-imports src/mypackage/myfile.py --application-directories src
-```
-
-```diff
-- from . import __version__
-+ from mypackage import __version__
-```
-
-Multiple application directories should be colon-separated, e.g. `--application-directories .:src`. This is the same as in [reorder-python-imports](https://github.com/asottile/reorder_python_imports).
-
-### Only use relative imports
-
-Use the `--never` flag, e.g.
-
-```console
-$ absolufy-imports mypackage/myfile.py --never
-```
-
-```diff
-- from mypackage import __version__
-+ from . import __version__
-```
+You can pass extra command-line flags that `black` would normally accept, such as `--check`. Furthermore, any option you specify
+in `pyproject.toml` will be respected.
