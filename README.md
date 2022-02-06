@@ -41,7 +41,7 @@ black-tabby-formatter `find . -name "*.py"`
 or, using pre-commit,
 
 ```console
-pre-commit try-repo https://github.com/MarcoGorelli/black-tabby-formatter
+pre-commit try-repo https://github.com/MarcoGorelli/black-tabby-formatter --all-files
 ```
 
 .
