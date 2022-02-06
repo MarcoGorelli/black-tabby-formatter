@@ -26,6 +26,25 @@ Sample `.pre-commit-config.yaml`:
     -   id: black-tabby-formatter
 ```
 
+## Command-line
+
+```console
+black-tabby-formatter file.py
+```
+
+To run on a directory, you can do:
+
+```console
+black-tabby-formatter `find . -name "*.py"`
+```
+
+or, using pre-commit,
+
+```console
+pre-commit try-repo https://github.com/MarcoGorelli/black-tabby-formatter
+```
+
+.
 
 ## Configuration
 
