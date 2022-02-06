@@ -61,7 +61,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     sys.stdout.write(output.stdout)
     sys.stderr.write(stderr)
-    sys.exit(ret)
+    return ret
 
 
 if __name__ == '__main__':

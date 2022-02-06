@@ -1,5 +1,6 @@
 import os
-import subprocess
+
+from black_tabby_formatter import main
 
 
 def test_main(tmpdir):
@@ -7,20 +8,13 @@ def test_main(tmpdir):
     file = os.path.join(tmpdir, 'tmpfile.py')
     with open(file, 'w') as fd:
         fd.write(content)
-    output = subprocess.run(
-        [
-            'python', '-m', 'black_tabby_formatter',
-            file,
-        ], universal_newlines=True,
-        stderr=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-    )
+
+    ret = main([file])
     with open(file) as fd:
         newcontent = fd.read()
 
     assert newcontent == 'if True:\n\tpass\n'
-    assert 'reformatted' in output.stderr
-    assert output.returncode == 1
+    assert ret == 1
 
 
 def test_main_noop(tmpdir):
@@ -28,20 +22,12 @@ def test_main_noop(tmpdir):
     file = os.path.join(tmpdir, 'tmpfile.py')
     with open(file, 'w') as fd:
         fd.write(content)
-    output = subprocess.run(
-        [
-            'python', '-m', 'black_tabby_formatter',
-            file,
-        ], universal_newlines=True,
-        stderr=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-    )
+    ret = main([file])
     with open(file) as fd:
         newcontent = fd.read()
 
     assert newcontent == content
-    assert 'unchanged' in output.stderr
-    assert output.returncode == 0
+    assert ret == 0
 
 
 def test_main_no_black_change(tmpdir):
@@ -49,20 +35,12 @@ def test_main_no_black_change(tmpdir):
     file = os.path.join(tmpdir, 'tmpfile.py')
     with open(file, 'w') as fd:
         fd.write(content)
-    output = subprocess.run(
-        [
-            'python', '-m', 'black_tabby_formatter',
-            file,
-        ], universal_newlines=True,
-        stderr=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-    )
+    ret = main([file])
     with open(file) as fd:
         newcontent = fd.read()
 
     assert newcontent == 'if True:\n\tpass\n'
-    assert 'reformatted' in output.stderr
-    assert output.returncode == 1
+    assert ret == 1
 
 
 def test_main_multiple_files(tmpdir):
@@ -74,14 +52,7 @@ def test_main_multiple_files(tmpdir):
     file2 = os.path.join(tmpdir, 'tmpfile2.py')
     with open(file2, 'w') as fd:
         fd.write(content2)
-    output = subprocess.run(
-        [
-            'python', '-m', 'black_tabby_formatter',
-            file1, file2,
-        ], universal_newlines=True,
-        stderr=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-    )
+    ret = main([file1, file2])
     with open(file1) as fd:
         newcontent1 = fd.read()
     with open(file2) as fd:
@@ -89,5 +60,4 @@ def test_main_multiple_files(tmpdir):
 
     assert newcontent1 == 'if True:\n\tpass\n'
     assert newcontent2 == 'if False:\n\tpass\n'
-    assert 'reformatted' in output.stderr
-    assert output.returncode == 1
+    assert ret == 1
