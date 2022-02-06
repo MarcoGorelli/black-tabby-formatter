@@ -11,7 +11,9 @@ def test_main(tmpdir):
         [
             'python', '-m', 'black_tabby_formatter',
             file,
-        ], universal_newlines=True, capture_output=True,
+        ], universal_newlines=True,
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
     )
     with open(file) as fd:
         newcontent = fd.read()
@@ -30,7 +32,9 @@ def test_main_noop(tmpdir):
         [
             'python', '-m', 'black_tabby_formatter',
             file,
-        ], universal_newlines=True, capture_output=True,
+        ], universal_newlines=True,
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
     )
     with open(file) as fd:
         newcontent = fd.read()
@@ -49,7 +53,9 @@ def test_main_no_black_change(tmpdir):
         [
             'python', '-m', 'black_tabby_formatter',
             file,
-        ], universal_newlines=True, capture_output=True,
+        ], universal_newlines=True,
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
     )
     with open(file) as fd:
         newcontent = fd.read()
@@ -72,7 +78,9 @@ def test_main_multiple_files(tmpdir):
         [
             'python', '-m', 'black_tabby_formatter',
             file1, file2,
-        ], universal_newlines=True, capture_output=True,
+        ], universal_newlines=True,
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
     )
     with open(file1) as fd:
         newcontent1 = fd.read()

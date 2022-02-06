@@ -30,7 +30,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
         output = subprocess.run(
             [sys.executable, '-m', 'black', *inverse_mapping.keys(), *kwargs],
-            capture_output=True,
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
             universal_newlines=True,
         )
         ret = output.returncode
